@@ -30,7 +30,7 @@ const notoSansKhmer = Noto_Sans_Khmer({
 });
 
 export const metadata: Metadata = {
-  title: "Nem Sophal — Full Stack Developer",
+  title: "Nem Sophal — Full-Stack Developer",
   description: "Portfolio of Nem Sophal, a full stack developer.",
 };
 
