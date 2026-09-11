@@ -1,44 +1,133 @@
-import { achievements, certificates, skills } from "@/data/profile";
+"use client";
+
+import { getAchievements, getCertificates, skills } from "@/data/profile";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ExploreSection() {
+  const { locale, t } = useLanguage();
+  const achievements = getAchievements(locale);
+  const certificates = getCertificates(locale);
+
   return (
-    <section
-      id="explore"
-      className="mx-auto max-w-5xl px-6 py-24"
-    >
+    <section id="explore" className="mx-auto max-w-5xl px-6 py-24">
       <h2 className="font-pixel text-2xl text-black sm:text-3xl dark:text-zinc-50">
-        Explore
+        {t.explore.heading}
       </h2>
 
       <div className="mt-10">
         <h3 className="font-pixel text-lg text-black dark:text-zinc-50">
-          Skills
+          {t.explore.skills}
         </h3>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {skills.map((skill) => (
-            <div key={skill.name}>
-              <div className="flex justify-between text-sm">
-                <span className="font-medium text-zinc-700 dark:text-zinc-300">
-                  {skill.name}
-                </span>
-                <span className="font-mono text-zinc-500 dark:text-zinc-400">
-                  {skill.level}%
-                </span>
-              </div>
-              <div className="mt-2 h-2 w-full rounded-full bg-black/10 dark:bg-white/10">
-                <div
-                  className="h-2 rounded-full bg-foreground"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
+        <div className="mt-6 grid gap-10 sm:grid-cols-2">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              {t.explore.frontend}
+            </p>
+            <div className="mt-4 space-y-5">
+              {skills.frontend.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">
+                      {skill.name}
+                    </span>
+                    <span className="font-mono text-zinc-500 dark:text-zinc-400">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-2 w-full rounded-full bg-black/10 dark:bg-white/10">
+                    <div
+                      className="h-2 rounded-full bg-foreground"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              {t.explore.backend}
+            </p>
+            <div className="mt-4 space-y-5">
+              {skills.backend.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">
+                      {skill.name}
+                    </span>
+                    <span className="font-mono text-zinc-500 dark:text-zinc-400">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-2 w-full rounded-full bg-black/10 dark:bg-white/10">
+                    <div
+                      className="h-2 rounded-full bg-foreground"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              {t.explore.databases}
+            </p>
+            <div className="mt-4 space-y-5">
+              {skills.databases.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">
+                      {skill.name}
+                    </span>
+                    <span className="font-mono text-zinc-500 dark:text-zinc-400">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-2 w-full rounded-full bg-black/10 dark:bg-white/10">
+                    <div
+                      className="h-2 rounded-full bg-foreground"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              {t.explore.tools}
+            </p>
+            <div className="mt-4 space-y-5">
+              {skills.tools.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">
+                      {skill.name}
+                    </span>
+                    <span className="font-mono text-zinc-500 dark:text-zinc-400">
+                      {skill.level}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-2 w-full rounded-full bg-black/10 dark:bg-white/10">
+                    <div
+                      className="h-2 rounded-full bg-foreground"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="mt-16">
         <h3 className="font-pixel text-lg text-black dark:text-zinc-50">
-          Achievements
+          {t.explore.achievements}
         </h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {achievements.map((item) => (
@@ -62,7 +151,7 @@ export default function ExploreSection() {
 
       <div className="mt-16">
         <h3 className="font-pixel text-lg text-black dark:text-zinc-50">
-          Certificates
+          {t.explore.certificates}
         </h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {certificates.map((cert) => (

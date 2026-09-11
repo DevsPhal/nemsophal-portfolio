@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HomeSection from "@/components/HomeSection";
 import AboutSection from "@/components/AboutSection";
 import ExploreSection from "@/components/ExploreSection";
-import { personalInfo } from "@/data/profile";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -13,9 +13,7 @@ export default function Home() {
         <AboutSection />
         <ExploreSection />
       </main>
-      <footer className="border-t border-black/10 px-6 py-8 text-center text-sm text-zinc-500 dark:border-white/10 dark:text-zinc-400">
-        © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }

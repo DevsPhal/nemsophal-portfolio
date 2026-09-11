@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Noto_Sans_Khmer,
+  Pixelify_Sans,
+} from "next/font/google";
 import Script from "next/script";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,13 +20,18 @@ const geistMono = Geist_Mono({
 });
 
 const pixelifySans = Pixelify_Sans({
-  variable: "--font-pixel",
+  variable: "--font-pixel-sans",
   subsets: ["latin"],
 });
 
+const notoSansKhmer = Noto_Sans_Khmer({
+  variable: "--font-khmer",
+  subsets: ["khmer"],
+});
+
 export const metadata: Metadata = {
-  title: "Nem Sophal — Software Developer",
-  description: "Portfolio of Nem Sophal, a software developer.",
+  title: "Nem Sophal — Full Stack Developer",
+  description: "Portfolio of Nem Sophal, a full stack developer.",
 };
 
 export default function RootLayout({
@@ -32,7 +43,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${pixelifySans.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${pixelifySans.variable} ${notoSansKhmer.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
         <Script
@@ -48,7 +59,19 @@ export default function RootLayout({
             `,
           }}
         />
-        {children}
+        <Script
+          id="lang-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var locale = localStorage.getItem('locale');
+                if (locale === 'km' || locale === 'en') document.documentElement.lang = locale;
+              } catch (e) {}
+            `,
+          }}
+        />
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

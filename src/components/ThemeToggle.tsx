@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 function subscribe(callback: () => void) {
   const observer = new MutationObserver(callback);
@@ -21,6 +22,7 @@ function getServerSnapshot() {
 
 export default function ThemeToggle() {
   const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const { t } = useLanguage();
 
   function toggle() {
     const next = !isDark;
@@ -32,7 +34,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label="Toggle dark mode"
+      aria-label={t.theme.toggle}
       aria-pressed={isDark}
       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black/10 text-zinc-700 transition-colors hover:bg-black/5 dark:border-white/10 dark:text-zinc-300 dark:hover:bg-white/10"
     >
